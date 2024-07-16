@@ -5,6 +5,7 @@ using UnityEngine;
 public class RepeatBackground : MonoBehaviour
 {
     private Vector3 startPos;
+    private RunWhiskeyManager gameManager;
     private float repeatWidth;
 
     // Start is called before the first frame update
@@ -12,14 +13,18 @@ public class RepeatBackground : MonoBehaviour
     {
         startPos = transform.position;
         repeatWidth = GetComponent<BoxCollider>().size.x / 2;
+        gameManager = GameObject.Find("Game Manager").GetComponent<RunWhiskeyManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < startPos.x - repeatWidth)
+        if (gameManager.isGameActive)
         {
-            transform.position = startPos;
+            if (transform.position.x < startPos.x - repeatWidth)
+            {
+                transform.position = startPos;
+            }
         }
     }
 }

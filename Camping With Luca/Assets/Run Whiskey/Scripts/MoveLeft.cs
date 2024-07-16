@@ -6,6 +6,7 @@ public class MoveLeft : MonoBehaviour
 {
     private float speed = 15;
     private float leftBound = -15;
+
     private PlayerController pcScript;
     private RunWhiskeyManager gameManagerScript;
 
@@ -19,18 +20,21 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManagerScript.meter % 50 == 0)
+        if(gameManagerScript.isGameActive)
         {
-            speed += 0.2f;
-        }
-        if (pcScript.gameOver == false)
-        {
-            transform.Translate(Vector3.left * Time.deltaTime * speed);
-        }
+            if (gameManagerScript.meter % 50 == 0)
+            {
+                speed += 0.2f;
+            }
+            if (pcScript.gameOver == false)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * speed);
+            }
 
-        if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
-        {
-            Destroy(gameObject);
+            if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

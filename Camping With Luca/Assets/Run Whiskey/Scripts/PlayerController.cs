@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private Animator playerAnim;
     private AudioSource playerAudio;
+    private RunWhiskeyManager gameManager;
 
     public ParticleSystem explosionParticle;
     public ParticleSystem dirtParticle;
@@ -25,14 +26,17 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<RunWhiskeyManager>();
 
         Physics.gravity *= gravityModifier;
+
+        //playerAnim.SetBool("Stop_b", true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnTheGround && !gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnTheGround && !gameOver && gameManager.isGameActive)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnTheGround = false;
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviour
             dirtParticle.Stop();
             playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
