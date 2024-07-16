@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - Tequila
+  - Whiskey
   layers:
   - Default
   - TransparentFX

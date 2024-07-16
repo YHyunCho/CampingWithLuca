@@ -7,7 +7,7 @@ public class RunWhiskeyManager : MonoBehaviour
 {
     public TextMeshProUGUI meterText;
     private PlayerController pcScript;
-    private int meter;
+    public int meter;
     private int meterValue;
 
     // Start is called before the first frame update
