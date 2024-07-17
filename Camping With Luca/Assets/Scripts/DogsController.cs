@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class DogsController : MonoBehaviour
 {
     private Animator dogAnim;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,15 +14,12 @@ public class DogsController : MonoBehaviour
 
         dogAnim.SetTrigger("Tail_trig");
     }
-
     private void OnMouseDown()
     {
         if (gameObject.CompareTag("Whiskey"))
         {
+            GameManager.returnToMain = true;
             SceneManager.LoadScene("Run Whiskey");
         }
     }
-
-    
-
 }

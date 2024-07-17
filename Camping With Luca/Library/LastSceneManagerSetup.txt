@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Camping With Luca.unity
+- path: Assets/Run Whiskey/Run Whiskey.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

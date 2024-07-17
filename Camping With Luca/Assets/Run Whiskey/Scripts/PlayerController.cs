@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private float gravityModifier = 5;
 
     private bool isOnTheGround;
-    public bool gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +29,13 @@ public class PlayerController : MonoBehaviour
 
         Physics.gravity *= gravityModifier;
 
-        //playerAnim.SetBool("Stop_b", true);
+        playerAnim.SetTrigger("Stop_trig");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnTheGround && !gameOver && gameManager.isGameActive)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnTheGround && gameManager.isGameActive)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnTheGround = false;
@@ -44,7 +43,6 @@ public class PlayerController : MonoBehaviour
             dirtParticle.Stop();
             playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -56,8 +54,7 @@ public class PlayerController : MonoBehaviour
 
         } else if(collision.gameObject.CompareTag("Obstacle"))
         {
-            gameOver = true;
-            Debug.Log("GAME OVER");
+            gameManager.GameOver();
 
             dirtParticle.Stop();
             explosionParticle.Play();
